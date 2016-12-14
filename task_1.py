@@ -17,7 +17,7 @@ def sad_prey(func):
     return wrapper
 
 
-#Metaclass for creating Singleton, this is bad practice
+#Metaclass for creating Singleton, this is a bad practice
 class Singleton(type):
     __instance = None
 
@@ -40,7 +40,11 @@ class Residents(metaclass=ABCMeta):
 
 class Snail(Residents):
     def __init__(self, weight):
-        self.weight = weight
+        try:
+            self.weight = int(weight)
+        except ValueError:
+            print('Resident weight must be a integer')
+            raise SystemExit
         self.prey_count = 0
 
     def get_weight(self):
@@ -62,7 +66,11 @@ class Snail(Residents):
 
 class Seaweed(Residents):
     def __init__(self, weight):
-        self.weight = weight
+        try:
+            self.weight = int(weight)
+        except ValueError:
+            print('Resident weight must be a integer')
+            raise SystemExit
 
     def get_weight(self):
         return self.weight
@@ -74,7 +82,11 @@ class Seaweed(Residents):
 
 class Fish(Residents):
     def __init__(self, weight):
-        self.weight = weight
+        try:
+            self.weight = int(weight)
+        except ValueError:
+            print('Resident weight must be a integer')
+            raise SystemExit
 
     def get_weight(self):
         return self.weight
@@ -128,7 +140,7 @@ if __name__ == '__main__':
 
     #new predator fish
     bivis = PredatorFish(10, 'Bivis')
-    bathed = PredatorFish(10, 'Bathed')
+    bathed = PredatorFish('ten', 'Bathed')
 
     #include fish in aquarium
     for fish in range(QUANTITY_FISH):
